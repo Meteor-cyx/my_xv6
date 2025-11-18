@@ -1,6 +1,6 @@
 // On-disk file system format.
 // Both the kernel and user programs use this header file.
-
+// 文件系统
 
 #define ROOTINO  1   // root i-number
 #define BSIZE 1024  // block size
@@ -53,8 +53,12 @@ struct dinode {
 // Directory is a file containing a sequence of dirent structures.
 #define DIRSIZ 14
 
-struct dirent {
-  ushort inum;
-  char name[DIRSIZ];
+//目录项
+struct dirent {    //directory entry
+  ushort inum;     //inode number
+  char name[DIRSIZ]; //每个文件名长度固定 14 字节（不够会用 0 填充）
 };
+
+//short两字节，一共16字节
+//linux中，是变长的
 

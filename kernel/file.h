@@ -15,18 +15,18 @@ struct file {
 
 // in-memory copy of an inode
 struct inode {
-  uint dev;           // Device number
-  uint inum;          // Inode number
-  int ref;            // Reference count
+  uint dev;           // Device number 属于哪个设备？
+  uint inum;          // Inode number  编号
+  int ref;            // Reference count   引用计数，有多少进程打开
   struct sleeplock lock; // protects everything below here
   int valid;          // inode has been read from disk?
 
   short type;         // copy of disk inode
-  short major;
+  short major;        // 针对设备文件
   short minor;
   short nlink;
-  uint size;
-  uint addrs[NDIRECT+1];
+  uint size;    //文件大小
+  uint addrs[NDIRECT+1];     //数据块
 };
 
 // map major device number to device functions.

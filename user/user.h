@@ -1,6 +1,8 @@
 struct stat;
 
-// system calls
+// system calls 系统调用！！
+// 有什么特点？找不到实现！！！
+// 汇编实现
 int fork(void);
 int exit(int) __attribute__((noreturn));
 int wait(int*);

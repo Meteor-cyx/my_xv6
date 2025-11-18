@@ -11,12 +11,12 @@
 #define PIPESIZE 512
 
 struct pipe {
-  struct spinlock lock;
-  char data[PIPESIZE];
-  uint nread;     // number of bytes read
-  uint nwrite;    // number of bytes written
-  int readopen;   // read fd is still open
-  int writeopen;  // write fd is still open
+  struct spinlock lock; //同步
+  char data[PIPESIZE];  //内核缓冲区
+  uint nread;     // number of bytes read    读取位置
+  uint nwrite;    // number of bytes written  写入位置
+  int readopen;   // read fd is still open    是否有读端
+  int writeopen;  // write fd is still open   是否有写端
 };
 
 int
