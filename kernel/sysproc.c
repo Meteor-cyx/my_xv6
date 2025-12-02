@@ -69,15 +69,29 @@ sys_sleep(void)
   return 0;
 }
 
-
-#ifdef LAB_PGTBL
-int
-sys_pgaccess(void)
-{
-  // lab pgtbl: your code here.
-  return 0;
+// #ifdef LAB_PGTBL
+int sys_pgaccess(void){
+    uint64 vaddr;//起始虚拟地址
+    int num;     //遍历页数目
+    uint64 res_addr;  //用户存储返回结果的地址
+    argaddr(0, &vaddr);
+    argint(1, &num);
+    argaddr(2, &res_addr);
+    uint64 mask = 0;  //记录掩码
+    struct proc* p = myproc();  //获取当前进程
+    pagetable_t pagetable =  p->pagetable;  //获取进程的页表
+    pte_t* pte;  //一会接收页表项
+    for(int i = 0; i < num; i++){
+        pte = (pagetable,vaddr+i*PGSIZE,0);
+        if(*pte & PTE_A){
+            *pte &= ~PTE_A;//清空pte_a位
+            mask |= (1L<<i);
+        }
+    }
+    copyout(pagetable,res_addr,(char*)&mask,sizeof(uint64));
+    return 0;
 }
-#endif
+// #endif
 
 uint64
 sys_kill(void)
