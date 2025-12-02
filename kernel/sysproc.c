@@ -82,7 +82,7 @@ int sys_pgaccess(void){
     pagetable_t pagetable =  p->pagetable;  //获取进程的页表
     pte_t* pte;  //一会接收页表项
     for(int i = 0; i < num; i++){
-        pte = (pagetable,vaddr+i*PGSIZE,0);
+        pte = walk(pagetable,vaddr+i*PGSIZE,0);
         if(*pte & PTE_A){
             *pte &= ~PTE_A;//清空pte_a位
             mask |= (1L<<i);

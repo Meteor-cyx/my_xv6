@@ -1,0 +1,5 @@
+Other system calls that only return small pieces of per-process information
+could also be accelerated. For example, getppid() could be sped up by storing
+the parent PID in the shared USYSCALL page. The user process could read this
+value directly without a trap into the kernel. Any system call that only
+retrieves read-only process metadata could similarly avoid kernel crossings.
