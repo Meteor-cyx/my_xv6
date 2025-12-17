@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "defines": ["LAB_PGTBL", "SOL_PGTBL"],
+            "includePath": ["${workspaceFolder}", "${workspaceFolder}/kernel", "${workspaceFolder}/user"],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
